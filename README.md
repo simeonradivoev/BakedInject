@@ -82,7 +82,7 @@ public class TestInjection
 # Notes
 If you really, really, really want reflection it can be enabled by a script define `ENABLE_REFLECT_INJECTION`. Then reflection will be used as a fallback
 
-Here is the weaved master methods that registers factories and injectors, de-compiled using JetBrains dotPeek.
+Here is an example weaved master method that registers factories and injectors, de-compiled using JetBrains dotPeek.
 ``` csharp
 using BakedInject;
 using Scenes.Scripts;
