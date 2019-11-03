@@ -1,0 +1,21 @@
+{
+    "name": "BakedInject.Editor",
+    "references": [
+        "GUID:b54d990b1f086394dbbb90cb13cc493e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Mono.Cecil.dll",
+        "Mono.Cecil.Pdb.dll",
+        "Mono.Cecil.Mdb.dll",
+        "Mono.Cecil.Rocks.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

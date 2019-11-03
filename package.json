@@ -1,0 +1,18 @@
+{
+  "name": "baked-inject",
+  "displayName": "Baked Inject",
+  "version": "0.0.1-preview",
+  "unity": "2019.1",
+  "description": "Baked dependency injection for Unity.",
+  "keywords": [
+    "unity",
+	"dependency injection",
+	"injection",
+	"mono cecil",
+	"weaving"
+  ],
+  "dependencies": 
+  {
+	"nuget.mono-cecil" : "0.1.6-preview"
+  }
+}
