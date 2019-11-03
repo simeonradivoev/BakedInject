@@ -1,3 +1,5 @@
+# Baked dependency injection for Unity.
+
 This is a tiny dependency injection framework for Unity, that uses Mono.Cecil to weave generated assemblies and add baked factories and injection methods. This allows injection to work without using reflection making it faster and able to work in AOT compilation, like IL2CPP.
 
 This is still experimental and should not be used in production.
@@ -77,5 +79,5 @@ public class TestInjection
 }
 ```
 
-#Notes
+# Notes
 If you really, really, really want reflection it can be enabled by a script define `ENABLE_REFLECT_INJECTION`. Then reflection will be used as a fallback
