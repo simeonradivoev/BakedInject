@@ -81,3 +81,24 @@ public class TestInjection
 
 # Notes
 If you really, really, really want reflection it can be enabled by a script define `ENABLE_REFLECT_INJECTION`. Then reflection will be used as a fallback
+
+Here is the weaved master methods that registers factories and injectors, de-compiled using JetBrains dotPeek.
+``` csharp
+using BakedInject;
+using Scenes.Scripts;
+using UnityEngine;
+
+namespace Injection
+{
+  public class Baker
+  {
+    [RuntimeInitializeOnLoadMethod]
+    private static void BakeInjection()
+    {
+      ContainerDatabase.Register<TestInjection2>(new ContainerDatabase.Factory(TestInjection2.TestInjection2FactoryMethod));
+      ContainerDatabase.Register<TestInjection>(new ContainerDatabase.Injector(TestInjection.TestInjectionInjectionMethod));
+    }
+  }
+}
+
+```
