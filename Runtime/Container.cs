@@ -25,6 +25,10 @@ namespace BakedInject
             {
             }
 
+            /// <summary>
+            /// An instance will be used when resolving.
+            /// </summary>
+            /// <param name="instance">The instance to use.</param>
             public Binding<T> FromInstance([NotNull] T instance)
             {
                 if (instance == null)
@@ -91,12 +95,20 @@ namespace BakedInject
                 concreteType = type;
             }
 
+            /// <summary>
+            /// Create the binding concrete type.
+            /// This type will be used for creating new instances.
+            /// </summary>
             public Binding To<T>()
             {
                 concreteType = typeof(T);
                 return this;
             }
 
+            /// <summary>
+            /// An instance will be used when resolving.
+            /// </summary>
+            /// <param name="instance">The instance to use.</param>
             public Binding FromInstance([NotNull] object instance)
             {
                 if (!type.IsInstanceOfType(instance))
@@ -109,31 +121,38 @@ namespace BakedInject
                 return this;
             }
 
-            public Binding FromInstance<T>() where T : new()
-            {
-                this.instance = new T();
-                this.scope = ScopeTypes.Singleton;
-                return this;
-            }
-
+            /// <summary>
+            /// The specified factory will be called when resolving the binding.
+            /// </summary>
+            /// <param name="instanceFactory">The func that provides the container for manual injection.</param>
             public Binding FromFactory([NotNull] Func<Container, object> instanceFactory)
             {
                 this.instanceFactory = instanceFactory;
                 return this;
             }
 
+            /// <summary>
+            /// The specified factory will be called when resolving the binding.
+            /// </summary>
+            /// <param name="instanceFactory">The func that will be called.</param>
             public Binding FromFactory([NotNull] Func<object> instanceFactory)
             {
                 this.instanceFactory = c => instanceFactory.Invoke();
                 return this;
             }
 
+            /// <summary>
+            /// Should there be only one created instance for this binding, regardless of how many times it's resolved.
+            /// </summary>
             public Binding AsSingle()
             {
                 this.scope = ScopeTypes.Singleton;
                 return this;
             }
 
+            /// <summary>
+            /// Should a new instance be created on each resolve.
+            /// </summary>
             public Binding AsTransient()
             {
                 this.scope = ScopeTypes.Transient;
@@ -141,6 +160,9 @@ namespace BakedInject
             }
         }
 
+        /// <summary>
+        /// Create a new binding of type.
+        /// </summary>
         public Binding Bind(Type type)
         {
             var binding = new Binding(type);
@@ -154,6 +176,9 @@ namespace BakedInject
             return binding;
         }
 
+        /// <summary>
+        /// Create a new binding of type.
+        /// </summary>
         public Binding<T> Bind<T>()
         {
             var binding = new Binding<T>();
@@ -167,14 +192,24 @@ namespace BakedInject
             return binding;
         }
 
+        /// <summary>
+        /// Create a new binding of type and assign a reference to it.
+        /// This marks the binding as a singleton and will be injected only once.
+        /// </summary>
+        /// <typeparam name="T">Type of binding.</typeparam>
+        /// <param name="val">The instance of binding.</param>
         public Binding Bind<T>(T val)
         {
             return Bind<T>().FromInstance(val);
         }
 
+        /// <summary>
+        /// Create a new binding with a factory that uses the empty constructor of the instance.
+        /// </summary>
+        /// <typeparam name="T">The type of binding.</typeparam>
         public Binding BindNew<T>() where T : new()
         {
-            return Bind<T>().FromInstance<T>();
+            return Bind<T>().FromFactory(c => new T());
         }
 
         private bool TryFindBindings([NotNull] Type type, out List<Binding> bindingsOut)
